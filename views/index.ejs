@@ -25,6 +25,12 @@
         </ul>
     </nav>
 
+    <% if(message != "") {  %>
+        <section id="message">
+            <p><%= message %></p> <span id="close">&times;</span>
+        </section>
+    <% }  %>
+
     <header>
         <article>
             <h1><%= titulo %></h1>
@@ -44,7 +50,7 @@
                 <img src="/img/cursos.png" alt="">
             </article>
 
-            <article id="content">
+            <!-- <article id="content">
                 <h3>Desenvolvimento de Software</h3>
 
                 <ul>
@@ -59,6 +65,22 @@
                 </ul>
 
                 <a id="inscrever" href="#inscrever">Inscreva-se agora!</a>
+            </article> -->
+            <article id="content">
+                <h3>Desenvolvimento de Software</h3>
+                <ul>
+                    <% devList.forEach(item => { %>
+                        <li><%= item %></li>
+                    <% }) %> 
+                </ul>
+                <h3>Analytics</h3>
+                <ul>
+                    <% analyticsList.forEach(item => { %>
+                        <li><%= item %></li>
+                    <% }) %> 
+                </ul>
+                
+                <a id="inscrever" href="#inscrever">Inscreva-se agora!</a>
             </article>
         </section>
     </section>
@@ -66,17 +88,17 @@
     <section id="inscrever">
         <h2>Inscreva-se!</h2>
 
-        <form action="">
+        <form action="/subscription" method="POST">
             <div>
                 <label for="nome">Nome: </label>
                 <input type="text" name="nome" id="nome" placeholder="Digite seu nome" required>
             </div>
-
+        
             <div>
                 <label for="email">E-mail: </label>
                 <input type="email" name="email" id="email" placeholder="Digite seu email" required>
             </div>
-
+        
             <button type="submit">Inscrever-se</button>
         </form>
     </section>

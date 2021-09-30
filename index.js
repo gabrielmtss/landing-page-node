@@ -5,14 +5,25 @@ const path = require("path");
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded());
 
-// Substituição de function por arrow function
+let message = "";
+
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  const devList = ["Backend", "Frontend", "Fullstack"];
+  const analyticsList = ["Engenharia de dados", "Ciência de dados"];
+  res.render("index", {
+    titulo: "Blue",
+    devList: devList,
+    analyticsList: analyticsList,
+    message,
+  });
 });
 
-app.get("/index", (req, res) => {
-  res.render("index", { titulo: "Blue" });
+app.post("/subscription", (req, res) => {
+  const { nome, email } = req.body;
+  message = `Parabéns ${nome}, sua inscrição foi realizada com sucesso! Um e-mail foi enviado para: ${email}`;
+  res.redirect("/");
 });
 
 // Adicionando a const port e uma arow function de callback para mostrar no console que o servidor está rodando.
